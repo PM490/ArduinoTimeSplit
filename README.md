@@ -20,7 +20,7 @@ It is possible to change the number of fractions corresponding to one second, wh
 The diagram shows the relationship between the classes part of the library. At the completion of each time segment _Thread or Block_, a function is called to _servicing that class_. __SvcCall__ Class provides the infrastructure for fulfilling services on time events (__TimeThread, TimeDownTimer, TimePeriod, and StatusLED__). Additionally, __TimePeriod__ is also serviced at the start of the period by __SvcStartCall__.
 
 ####indicatorLED
-When working with Arduino, is always helpful to have a simple status LED. As part of the implementation of Threads, the library also includes a StatusLED Class. The service of __StatusLED__ is explicit, providing flexibility to where in the __loop()___ should take place.
+When working with Arduino, is always helpful to have a simple status LED. As part of the implementation of Threads, the library also includes a StatusLED Class. The service of __StatusLED__ is explicit, providing flexibility to where in  __loop()___ is performed.
 
 The indicator works by shifting a value, providing a countable number of flashes.
 
@@ -36,4 +36,12 @@ The indicator works by shifting a value, providing a countable number of flashes
  Code 0x07  On  7  | Code 0x0F  Off 7
  Code 0x08  Flash  | End of Table                 
  
- 
+The speed of LED flashing is given by the duration by the timebase (number of fractions per second). To make the flashing of the LED humanly countable when using fast threads, there is also an LED speed parameter to divide the thread count and slow it down.
+
+The declaration of the LED indicator also includes the state where the LED is ON.
+For example:
+
+```
+StatusLED indicatorLED (Pin_LED, HIGH,LED_Speed,0);
+```
+
