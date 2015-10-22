@@ -24,7 +24,6 @@ When working with Arduino, is always helpful to have a simple status LED. As par
 
 The indicator works by shifting a value, providing a countable number of flashes.
 
------------ | ------- | ----------- | ------
  LED Code   |         | LED Code    |       
 ----------- | ------- | ----------- | ------
  Code 0x00  |  OFF    |  Code 0x10  | On    
