@@ -14,4 +14,4 @@ Time is divided in fractions, here called _xsecs_. The default time base is _20 
 
 It is possible to change the number of fractions corresponding to one second, which we call the _time base_. The time base for the library is applicable to all __TimeBlocks__.
 
-![ArduinoThread Logo](https://raw.githubusercontent.com/PM490/TimeSplit/master/Images/TimeSplit.png)
+![TimeSplit Diagram](https://raw.githubusercontent.com/PM490/ArduinoTimeSplit/master/Images/TimeSplit.png)
