@@ -42,6 +42,7 @@ The declaration of the LED indicator also includes the state where the LED is ON
 For example:
 
 ```
-StatusLED indicatorLED (Pin_LED, HIGH,LED_Speed,0);
+// StatusLED indicatorLED (Pin_LED, HIGH, LED_Speed, threadStart)
+  StatusLED indicatorLED (13, HIGH, 2, 0);
 ```
 
