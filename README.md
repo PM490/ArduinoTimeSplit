@@ -15,3 +15,6 @@ Time is divided in fractions, here called _xsecs_. The default time base is _20 
 It is possible to change the number of fractions corresponding to one second, which we call the _time base_. The time base for the library is applicable to all __TimeBlocks__.
 
 ![TimeSplit Diagram](https://raw.githubusercontent.com/PM490/ArduinoTimeSplit/master/Images/TimeSplit.png)
+
+####Actions
+The diagram shows the relationship between the classes part of the library. At the completion of each time segment _Thread or Block_, a function is call to _servicing that class_. __SvcCall__ Class provides the infrastructure for servicing. Additionally, __TimePeriod__ is also serviced at the start of the period by __SvcStartCall__.
