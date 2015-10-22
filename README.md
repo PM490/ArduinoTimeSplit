@@ -13,3 +13,5 @@ Library timming is derived from __millis()__ and it does not use any hardware re
 Time is divided in fractions, here called _xsecs_. The default time base is _20 xsecs = 1 second_. The library keeps time in _xsecs, secs, mins, hrs, days, weeks_.
 
 It is possible to change the number of fractions corresponding to one second, which we call the _time base_. The time base for the library is applicable to all __TimeBlocks__.
+
+![alt text](https://github.com/pm490/TimeSplit/images/TimeSplit.png "Logo Title Text 1")
