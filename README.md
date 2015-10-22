@@ -34,4 +34,6 @@ The indicator works by shifting a value, providing a countable number of flashes
  Code 0x05  On  5  | Code 0x0D  Off 5
  Code 0x06  On  6  | Code 0x0E  Off 6
  Code 0x07  On  7  | Code 0x0F  Off 7
- Code 0x08  Flash
+ Code 0x08  Flash  |                  
+ 
+ 
