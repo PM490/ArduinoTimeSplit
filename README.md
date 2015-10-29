@@ -17,7 +17,7 @@ It is possible to change the number of fractions corresponding to one second, wh
 ![TimeSplit Diagram](https://raw.githubusercontent.com/PM490/ArduinoTimeSplit/master/Images/TimeSplit.png)
 
 ####Actions
-The diagram shows the relationship between the classes part of the library. At the completion of each time segment _Thread or Block_, a function is called to _servicing that class_. __SvcCall__ Class provides the infrastructure for fulfilling services on time events (__TimeThread, TimeDownTimer, TimePeriod, and StatusLED__). Additionally, __TimePeriod__ is also serviced at the start of the period by __SvcStartCall__.
+The diagram shows the relationship between the classes part of the library. At the completion of each time segment _Thread or Block_, a function is called to _servicing that object_. __SvcCall__ Class provides the infrastructure for fulfilling services on time events (__TimeThread, TimeDownTimer, TimePeriod, and StatusLED__). Additionally, __TimePeriod__ is also serviced at the start of the period by __SvcStartCall__.
 
 ####indicatorLED
 When working with Arduino, is always helpful to have a simple status LED. As part of the implementation of Threads, the library also includes a StatusLED Class. The service of __StatusLED__ is explicit, providing flexibility to where in  __loop()___ is performed.

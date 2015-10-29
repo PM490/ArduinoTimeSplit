@@ -1,0 +1,60 @@
+#######################################
+# Syntax Coloring Map For TimeSplit
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SvcCall	KEYWORD1
+SvcStartCall	KEYWORD1
+TimeBlock	KEYWORD1
+TimeRTClock	KEYWORD1
+TimeDownTimer	KEYWORD1
+TimePeriod	KEYWORD1
+TimeThread	KEYWORD1
+StatusLED	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+svcMakeActive	KEYWORD2
+svcMakeInactive	KEYWORD2
+svcArm	KEYWORD2
+svcFulfill	KEYWORD2
+svcAttach	KEYWORD2
+svcStartMakeActive	KEYWORD2
+svcStartMakeInactive	KEYWORD2
+svcStartArm	KEYWORD2
+svcStartFulfill	KEYWORD2
+svcStartAttach	KEYWORD2
+timeSet	KEYWORD2
+timeInc	KEYWORD2
+timeDec	KEYWORD2
+timeStamp	KEYWORD2
+timeSetBase	KEYWORD2
+timeSettoRTC	KEYWORD2
+timeRTCmillis	KEYWORD2
+timeRTCUpdate	KEYWORD2
+timeStampRTC	KEYWORD2
+timeRTCSame	KEYWORD2
+setDuration	KEYWORD2
+timeTimerFulfill	KEYWORD2
+setTimeEnd	KEYWORD2
+setDuration	KEYWORD2
+setRecurrency	KEYWORD2
+timeStampEnd	KEYWORD2
+timePeriodFulfill	KEYWORD2
+updatePeriodGetStatus	KEYWORD2
+updateRTCPeriodGetStatus	KEYWORD2
+setThread	KEYWORD2
+updateThreadGetStatus	KEYWORD2
+timeThreadFulfill	KEYWORD2
+StatusLED	KEYWORD2
+updateLED	KEYWORD2
+setLEDON	KEYWORD2
+setLEDOFF	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
