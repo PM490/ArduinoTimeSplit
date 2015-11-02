@@ -114,10 +114,50 @@ class TimeThread : public TimeRTClock, public SvcCall {
 	boolean threadStatus; // 1 when xsec corresponds to thread.
 };
 
-#if defined(AVR)
- #include "AVR/TimeSplitAVR.h"
+// Architecture specific include
+#if defined(ARDUINO_ARCH_AVR)
+
+// StatusLED optimized for AVR
+class StatusLED : public TimeThread {
+  public:
+	StatusLED (byte pinLED, boolean pinOnLED, byte pthreadPeriod, byte pthreadStart); //Constructor
+	byte codeLED;
+	void updateLED(void);
+	boolean setLEDON (void);
+	boolean setLEDOFF (void);
+	boolean timeThreadFulfill (void);
+	void svcMakeInactive (void); //Different to include LED OFF
+  private:
+    static const unsigned int menuItemLED [17];
+    static const unsigned int LED_State_Mask [16];	
+    boolean errorStatus;
+	uint8_t LEDBit;   // set pin's ports and bitmask
+	volatile uint8_t *LEDReg;
+	volatile uint8_t *LEDOut;
+	byte clockLED;
+	boolean pinLogicLED;
+};
+
 #else
- #error "The Class StatusLED only supports AVR boards."
-#endif
+// StatusLED using digitalWrite
+class StatusLED : public TimeThread {
+  public:
+	StatusLED (byte pinLED, boolean pinOnLED, byte pthreadPeriod, byte pthreadStart); //Constructor
+	byte codeLED;
+	void updateLED(void);
+	boolean setLEDON (void);
+	boolean setLEDOFF (void);
+	boolean timeThreadFulfill (void);
+	void svcMakeInactive (void); //Different to include LED OFF
+  private:
+    static const unsigned int menuItemLED [17];
+    static const unsigned int LED_State_Mask [16];	
+    boolean errorStatus;
+	byte pinOutLED;
+	byte clockLED;
+	boolean pinLogicLED;
+};
+#endif // Status LED AVR Optimization
+
 
 #endif

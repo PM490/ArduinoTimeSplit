@@ -17,13 +17,13 @@ StatusLED indicatorLED (Pin_LED, HIGH,LED_Speed,0);
 
 void setup() {
   Serial.begin(115200);
-  simpleClock.timeSetBase(25); // Define Time Base - 25 Threads per Second
+  simpleClock.timeSetBase(10); // Define Time Base - 10 Threads per Second
   
   //Start Real Time Counter at  8:59:50:0
   simpleClock.timeSet (0,50,59,8,0,0); // Define Time Start
   simpleClock.timeSettoRTC();  //Move Time to RTC
 
-  indicatorLED.codeLED = 1;
+  indicatorLED.codeLED = 2;
  
 }  
 
@@ -39,7 +39,7 @@ void loop() {
   if (simpleClock.xsecs == 0) {
     // Stamp RTC at Every Thread 0 (every second)
     simpleClock.timeStampRTC();
-    Serial.println(" simpleClock");
+    Serial.println( "TimeSplit");
     }
 	
 

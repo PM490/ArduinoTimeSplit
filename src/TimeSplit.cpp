@@ -448,8 +448,12 @@ const unsigned int StatusLED::menuItemLED [17] {
 
 const unsigned int StatusLED::LED_State_Mask [16] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,0x100,0x200,0x400,0x800,0x1000,0x2000,0x4000,0x8000};	
 
-// >>> StatusLED Methods
-StatusLED::	StatusLED(uint8_t pinLED, boolean pinOnLED, byte pthreadPeriod, byte pthreadStart)
+
+#if defined(ARDUINO_ARCH_AVR)
+
+
+// >>> StatusLED Methods - Optimized for AVR
+StatusLED::	StatusLED(byte pinLED, boolean pinOnLED, byte pthreadPeriod, byte pthreadStart)
 {
   uint8_t outPortLED;	
   errorStatus = 0;
@@ -537,3 +541,106 @@ boolean StatusLED::setLEDOFF (void) {
 	  return 1;	
 	  }
 }
+
+
+#else
+
+// >>> StatusLED Methods - using digitalWrite for processors other than AVR
+StatusLED::	StatusLED(byte pinLED, boolean pinOnLED, byte pthreadPeriod, byte pthreadStart)
+{
+  errorStatus = 0;
+  
+// get pin mapping and port for Led Pin
+#ifdef NUM_DIGITAL_PINS
+  if (pinLED >= NUM_DIGITAL_PINS) errorStatus = 1;
+#endif
+ 
+  pinLogicLED = pinOnLED;
+  pinOutLED = pinLED;
+  
+
+  if (!errorStatus) {
+//    *LEDReg |= LEDBit;						        // set LEDpin to OUTPUT 
+
+#ifdef PLATFORM_NAME
+  if(PLATFORM_NAME == "Galileo") { 
+    pinMode(pinOutLED, OUTPUT_FAST); //Use Output Fast for Galileo
+    }
+	else {
+    pinMode(pinOutLED, OUTPUT);
+	}
+#else	
+    pinMode(pinOutLED, OUTPUT);
+#endif	
+ 	setLEDOFF();
+  }
+    
+  //Thread
+  threadPeriod = pthreadPeriod;
+  threadCtr = threadPeriod + pthreadStart;
+  lastXsecs = xsecs;  
+  Status = 0;
+  svcNotFulfilled = 0;
+  svcArmed = 1;
+};
+
+void StatusLED::updateLED (void) {
+    unsigned int led_state_bit = 0;
+	led_state_bit =  ( menuItemLED[codeLED] & LED_State_Mask[ clockLED ] ) ;
+	if (led_state_bit == 0 ) {
+      setLEDOFF();
+	  }
+	  else {
+        setLEDON();
+		};
+	clockLED = ++clockLED & 0x0F;
+}
+
+boolean StatusLED::timeThreadFulfill (void){
+  if (updateThreadGetStatus() && svcNotFulfilled) {
+	 if (svcArmed) {
+		updateLED(); 
+	   }
+     svcNotFulfilled = 0;	   
+  }
+  return Status;
+};
+
+void StatusLED::svcMakeInactive( void ) {
+  svcArmed = 0;
+  setLEDOFF();
+};
+
+boolean StatusLED::setLEDON (void) {
+  if (!errorStatus) {
+    // Set LED On
+    if ( pinLogicLED ) {
+      digitalWrite(pinOutLED, HIGH);         // set send Pin High 
+      }
+      else {
+        digitalWrite(pinOutLED, LOW);         // set send Pin High 
+        }
+    return 0;
+    }
+	else {
+	  return 1;
+	  }
+}
+
+boolean StatusLED::setLEDOFF (void) {
+  if (!errorStatus) {
+    // Set LED OFF
+    if ( pinLogicLED ) {
+        digitalWrite(pinOutLED, LOW);         // set send Pin High 
+      }
+      else {
+        digitalWrite(pinOutLED, HIGH);         // set send Pin High 
+        }	  
+      return 0;
+    }
+	else {
+	  return 1;	
+	  }
+}
+
+#endif // ARDUINO_ARCH_AVR / Others
