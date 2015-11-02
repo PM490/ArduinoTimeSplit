@@ -11,7 +11,8 @@ The library has the basic building blocks to create real time applications, with
 Library timming is derived from __millis()__ and it does not use any hardware resources other than the pin for the LED indicator.
 
 ##Compatibility
-This version has been tested and is limited only to AVR. While the timing classes are compatible with any architecture that supports __millis()__ the indicatorLED has being optimized for AVR. As time permits, we will include other processors.
+
+This version has been tested only with AVR ang Galileo. While the timing classes are compatible with any architecture that supports __millis()__ the indicatorLED has only being optimized for AVR (Port manipulation) and uses digitalWrite for all other processors, including Galileo (OUTPUT_FAST). Optimization for other processors is possible, but not in the present roadmap.
 
 ####Dividing Time
 Time is divided in fractions, here called _xsecs_. The default time base is _20 xsecs = 1 second_. The library keeps time in _xsecs, secs, mins, hrs, days, weeks_.
