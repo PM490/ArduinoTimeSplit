@@ -1,4 +1,5 @@
 # Arduino - TimeSplit
+
 ##Arduino Library - Simple Thread and Time Counter
 
 This library was created as a simple tool to develop applications which require counting long periods of time, and at the same time, as an alternative for splitting the arduino __loop()__ into timeblocks that are used as Threads.
@@ -8,6 +9,9 @@ Also included in the library is an LED indicator class to allow simple messaging
 The library has the basic building blocks to create real time applications, without requiring RTC hardware, as long as the accuracy of the arduino clock is sufficient for the task.
 
 Library timming is derived from __millis()__ and it does not use any hardware resources other than the pin for the LED indicator.
+
+##Compatibility
+This version has been tested and is limited only to AVR. While the timing classes are compatible with any architecture that supports __millis()__ the indicatorLED has being optimized for AVR. As time permits, we will include other processors.
 
 ####Dividing Time
 Time is divided in fractions, here called _xsecs_. The default time base is _20 xsecs = 1 second_. The library keeps time in _xsecs, secs, mins, hrs, days, weeks_.

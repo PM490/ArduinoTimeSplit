@@ -6,11 +6,7 @@
 #ifndef TimeSplit_h
 #define TimeSplit_h
 
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 class SvcCall {
   public:
@@ -118,24 +114,10 @@ class TimeThread : public TimeRTClock, public SvcCall {
 	boolean threadStatus; // 1 when xsec corresponds to thread.
 };
 
-class StatusLED : public TimeThread {
-  public:
-	StatusLED (uint8_t pinLED, boolean pinOnLED, byte pthreadPeriod, byte pthreadStart); //Constructor
-	byte codeLED;
-	void updateLED(void);
-	boolean setLEDON (void);
-	boolean setLEDOFF (void);
-	boolean timeThreadFulfill (void);
-	void svcMakeInactive (void); //Different to include LED OFF
-  private:
-    static const unsigned int menuItemLED [17];
-    static const unsigned int LED_State_Mask [16];	
-    boolean errorStatus;
-	uint8_t LEDBit;   // set pin's ports and bitmask
-	volatile uint8_t *LEDReg;
-	volatile uint8_t *LEDOut;
-	byte clockLED;
-	boolean pinLogicLED;
-};
+#if defined(AVR)
+ #include "AVR/TimeSplitAVR.h"
+#else
+ #error "The Class StatusLED only supports AVR boards."
+#endif
 
 #endif
